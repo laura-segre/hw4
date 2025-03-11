@@ -1,1 +1,6 @@
 /* Application styles */
+/*
+ *= require bootstrap
+ *= require_tree .
+ *= require_self
+ */

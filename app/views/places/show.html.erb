@@ -1,16 +1,25 @@
 <h1><%= @place["name"] %></h1>
 
-<h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
-<% end %>
-
 <p>
-  <a href="/entries/new?place_id=<%= @place["id"] %>">New Entry</a>
+  <a class="btn btn-primary" href="/entries/new?place_id=<%= @place["id"] %>" role="button">New Entry</a>
 </p>
 
-<p>
-  <a href="/places">Back to All Places</a>
-</p>
+<h3>My Entries</h3>
+<div class="row">
+  <% for entry in @entries %>
+    <div class="col-lg-4 col-sm-6">
+    <div class="entry-box">
+      <h4><%= entry["title"] %></h4>
+      <h4><%= entry["occurred_on"] %></h4>
+      <p><%= entry["description"] %></p>
+      <%if entry.uploaded_image.attached? %>
+        <img src="<%= url_for(entry.uploaded_image)%>" class="img-fluid">
+      <%else%>
+      <%end%>
+    </div></div>
+  <% end %>
+</div>
+
+<div class="text-center mt-4">
+  <a href="/places" class="btn btn-link">All Places</a>
+</div>
