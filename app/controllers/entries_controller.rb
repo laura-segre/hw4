@@ -12,6 +12,7 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(entry_params)
+    @entry.uploaded_image.attach(params["uploaded_image"])
     @entry.user_id = session["user_id"] # Assign entry to the logged-in user
 
     if @entry.save
