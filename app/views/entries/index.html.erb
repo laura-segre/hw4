@@ -1,15 +1,15 @@
-<h1>Entries</h1>
-<ul>
-  <% if @entries.any? %>
+<h1>Your Entries</h1>
+
+<% if @entries.any? %>
+  <ul>
     <% @entries.each do |entry| %>
       <li>
-        <a href="/entries/<%= entry.id %>"><%= entry.title %></a>
+        <strong><%= entry.title %></strong> - <%= entry.occurred_on.strftime("%-m/%d/%y") %>
+        <p><%= entry.description %></p>
+        <a href="<%= entry_path(entry) %>">View Entry</a>
       </li>
     <% end %>
-  <% else %>
-    <li class="text-muted">No entries yet</li>
-  <% end %>
-</ul>
-<div class="text-center mt-3 mb-4">
-  <%= link_to "New Entry", new_entry_path, class: "btn btn-outline-dark" %>
-</div>
+  </ul>
+<% else %>
+  <p>No entries found. <a href="<%= new_entry_path %>">Create one</a>.</p>
+<% end %>
