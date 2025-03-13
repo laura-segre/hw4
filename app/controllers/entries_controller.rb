@@ -25,3 +25,25 @@ class EntriesController < ApplicationController
     end
       redirect_to "/places"
     end
+
+    def show
+      # Prevent users from seeing other users' entries
+      @entry = Entry.find_by(id: params[:id], user_id: session[:user_id])
+      if @entry.nil?
+        redirect_to entries_path, alert: "You are not authorized to view this entry."
+      end
+    end
+  
+    private
+  
+    def entry_params
+      params.require(:entry, :title, :description, :occurred_on, :place_id, :uploaded_image)
+    end
+  
+    def require_login
+      unless session[:user_id]
+        flash[:alert] = "You must be logged in to access this section."
+        redirect_to login_path
+      end
+    end
+  end

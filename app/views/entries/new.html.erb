@@ -1,12 +1,7 @@
 <h1>New Entry</h1>
 
-<% if session["user_id"].present? %>
-  <form action="/entries" method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-      <label for="uploaded_image_input" class="form-label">Upload Image</label>
-      <input type="file" name="uploaded_image" id="uploaded_image_input" class="form-control" accept="image/png, image/jpg, image/jpeg, image/gif">
-    </div>
-
+<% if @user != nil %>
+  
     <input type="hidden" name="place_id" value="<%= params["place_id"] %>">
 
     <p>
@@ -24,6 +19,11 @@
       <input type="date" name="occurred_on" id="occurred_on_input">
     </p>
 
+  <form action="/entries" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="uploaded_image_input" class="form-label">Upload Image</label>
+      <input type="file" name="uploaded_image" id="uploaded_image_input" class="form-control" accept="image/png, image/jpg, image/jpeg, image/gif">
+    </div>
     <button>Save</button>
   </form>
 <% else %>
