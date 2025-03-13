@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   get("/logout", {:controller => "sessions", :action => "destroy"})
   get("/signup", { controller: "users", action: "new" })
   
-  get("/", { controller: "places", action: "index" })
+  root to: 'places#index'
+  #get("/", { controller: "places", action: "index" })
 end
